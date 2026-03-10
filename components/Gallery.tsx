@@ -79,9 +79,9 @@ const Skiper30 = ({img=image}:{img?:string[]}) => {
         className='overflow-y-clip'
         transition={{
           type: 'spring',
-          stiffness: 900,
-          damping: 80,
-          mass: 10,
+          stiffness: 300,
+          damping: 50,
+          mass: 15,
         }}
         variants={{
           initial: {

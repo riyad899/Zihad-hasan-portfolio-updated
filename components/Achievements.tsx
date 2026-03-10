@@ -64,7 +64,7 @@ const certificates = [
     certificateURL: "https://example.com/cert4.pdf",
     credentialID: "0000",
     bg: "#000000",
-    image: "https://i.ibb.co.com/cSp2589S/Whats-App-Image-2026-03-10-at-11-45-16-PM.jpg", // Add your certificate image here
+    image: "https://i.ibb.co.com/JhGJXqg/Whats-App-Image-2026-03-10-at-11-47-15-PM.jpg", // Add your certificate image here
   }, {
     certificateId: "CERT-007",
     title: "15th Rover Mate",

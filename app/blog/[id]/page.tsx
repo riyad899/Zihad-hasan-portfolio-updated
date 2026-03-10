@@ -151,10 +151,10 @@ export default function BlogDetailPage() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-white/10">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <button
-            onClick={() => router.push('/')}
+            onClick={() => router.push('/#blogs')}
             className="text-white hover:text-gray-300 transition"
           >
-            ← Back to Home
+            ← Back to Blogs
           </button>
         </div>
       </nav>

@@ -18,6 +18,7 @@ export default function AdminPage() {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
   const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     category: "Blog",
@@ -127,6 +128,54 @@ export default function AdminPage() {
     });
   };
 
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      setError('Please select an image file');
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      setError('Image size should be less than 5MB');
+      return;
+    }
+
+    setUploadingImage(true);
+    setError('');
+
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      const apiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
+      const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setFormData(prev => ({
+          ...prev,
+          image: data.data.url,
+        }));
+        setSuccess('Image uploaded successfully!');
+      } else {
+        setError('Failed to upload image');
+      }
+    } catch (err) {
+      console.error('Error uploading image:', err);
+      setError('Error uploading image');
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: '#030203' }}>
@@ -140,12 +189,20 @@ export default function AdminPage() {
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold text-white">Admin Dashboard</h1>
-          <button
-            onClick={handleLogout}
-            className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-          >
-            Logout
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={() => router.push('/#blogs')}
+              className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+            >
+              View Blogs
+            </button>
+            <button
+              onClick={handleLogout}
+              className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+            >
+              Logout
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -217,15 +274,29 @@ export default function AdminPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Image URL</label>
-                <input
-                  type="url"
-                  name="image"
-                  value={formData.image}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-purple-500"
-                  placeholder="https://example.com/image.jpg"
-                />
+                <label className="block text-sm font-medium text-gray-300 mb-2">Blog Image *</label>
+                <div className="space-y-2">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-purple-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-700"
+                    disabled={uploadingImage}
+                  />
+                  {uploadingImage && (
+                    <p className="text-sm text-gray-400">Uploading image...</p>
+                  )}
+                  {formData.image && (
+                    <div className="mt-2">
+                      <img
+                        src={formData.image}
+                        alt="Preview"
+                        className="w-full h-40 object-cover rounded-lg border border-gray-700"
+                      />
+                      <p className="text-xs text-gray-400 mt-1 break-all">{formData.image}</p>
+                    </div>
+                  )}
+                </div>
               </div>
 
               <div>
