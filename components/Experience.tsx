@@ -1,42 +1,39 @@
 export default function Experience() {
-  const experiences = [
+const experiences = [
     {
       id: 1,
-      title: 'Senior Full Stack Developer',
-      company: 'Tech Innovators Inc.',
-      location: 'San Francisco, CA',
-      period: 'Jan 2024 - Present',
-      description: 'Leading a team of 8 developers in building scalable web applications. Architecting cloud-native solutions and implementing CI/CD pipelines.',
+      title: 'Deputy Program Secretary ',
+      company: 'Skillup Club,HRDI',
+      location: 'Daffodil International University',
+      period: 'jun 2025 - Present',
+      description: 'Organize events,Manage Events,Collaboration with Industry',
       achievements: [
-        'Reduced deployment time by 60% through automation',
-        'Mentored 5 junior developers',
-        'Implemented microservices architecture',
+        'Got dependable force Award',
+
       ],
       current: true,
     },
     {
       id: 2,
-      title: 'Full Stack Developer',
-      company: 'Digital Solutions Ltd.',
-      location: 'New York, NY',
-      period: 'Mar 2022 - Dec 2023',
-      description: 'Developed and maintained multiple client-facing applications using React, Node.js, and AWS.',
+      title: 'Campus Ambassador',
+      company: 'Netcom Learning Bangladesh.',
+      location: 'Dhaka,Banagladesh',
+      period: 'jul 2025 - jan 2026',
+      description: 'Arrange AgentX a prompt engineering compitaion and engage students.',
       achievements: [
-        'Built 15+ production applications',
-        'Improved app performance by 40%',
-        'Led migration to TypeScript',
+        'Best Volunteer Award',
       ],
       current: false,
     },
     {
       id: 3,
-      title: 'Frontend Developer',
-      company: 'Creative Web Agency',
+      title: 'Researcher',
+      company: 'QRARG',
       location: 'Remote',
-      period: 'Jun 2020 - Feb 2022',
-      description: 'Created responsive and interactive user interfaces for various client projects.',
+      period: 'Jun 2025 - present',
+      description: 'Research and Development projects ',
       achievements: [
-        'Delivered 20+ client projects',
+        'University Champion ',
         'Achieved 98% client satisfaction rate',
         'Introduced modern design systems',
       ],
@@ -44,14 +41,14 @@ export default function Experience() {
     },
     {
       id: 4,
-      title: 'Junior Developer',
-      company: 'StartUp Ventures',
-      location: 'Boston, MA',
-      period: 'Jan 2019 - May 2020',
-      description: 'Contributed to various web development projects and learned industry best practices.',
+      title: 'DATA Analyst & AI Engineer',
+      company: 'Black Mamba',
+      location: 'Dhaka,Bangladesh',
+      period: 'Jan 2024 - present',
+      description: 'Integrate AI with Company',
       achievements: [
         'Collaborated with cross-functional teams',
-        'Completed 100+ bug fixes and features',
+        'Completed Machine Learning and Deep Learning',
         'Gained expertise in Agile methodology',
       ],
       current: false,
@@ -62,7 +59,17 @@ export default function Experience() {
     <section id="experience" className="py-20" style={{ background: '#000000' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">Experience</h2>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black tracking-tight mb-4" style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            background: "linear-gradient(90deg, #555 0%, #fff 40%, #aaa 60%, #555 100%)",
+            backgroundSize: "200% auto",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            animation: "shimmer 3s linear infinite"
+          }}>
+            Experience
+          </h2>
           <p className="text-xl text-gray-300">My professional journey</p>
         </div>
 
@@ -86,7 +93,7 @@ export default function Experience() {
                   <div className="rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300" style={{ background: exp.current ? 'linear-gradient(90deg, #ff6b6b, #ffd93d)' : '#1a1a1a', border: exp.current ? 'none' : '1px solid #333' }}>
                     {exp.current && (
                       <span className="inline-block px-3 py-1 bg-white text-black text-xs font-semibold rounded-full mb-3">
-                        Current Position
+                        Current Position``
                       </span>
                     )}
                     <h3 className="text-2xl font-bold text-white mb-2">

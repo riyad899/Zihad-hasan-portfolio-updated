@@ -1,5 +1,27 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+
+interface BlogPost {
+  _id?: string;
+  id?: number;
+  title: string;
+  category: string;
+  date: string;
+  readTime: string;
+  excerpt: string;
+  image: string;
+  tags: string[];
+  link: string;
+}
+
 export default function Blogs() {
-  const posts = [
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fallback static posts
+  const staticPosts: BlogPost[] = [
     {
       id: 1,
       title: 'Building Scalable Microservices with Node.js',
@@ -33,53 +55,66 @@ export default function Blogs() {
       tags: ['CSS', 'Web Design', 'Frontend'],
       link: '#',
     },
-    {
-      id: 4,
-      title: 'Research: Blockchain in Healthcare Systems',
-      category: 'Research',
-      date: 'December 20, 2025',
-      readTime: '15 min read',
-      excerpt: 'Investigating the potential applications of blockchain technology in modern healthcare infrastructure.',
-      image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80',
-      tags: ['Blockchain', 'Healthcare', 'Innovation'],
-      link: '#',
-    },
-    {
-      id: 5,
-      title: 'GraphQL vs REST: A Practical Comparison',
-      category: 'Blog',
-      date: 'December 5, 2025',
-      readTime: '10 min read',
-      excerpt: 'Deep dive into the pros and cons of GraphQL and REST APIs with real-world examples.',
-      image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&q=80',
-      tags: ['GraphQL', 'REST', 'API'],
-      link: '#',
-    },
-    {
-      id: 6,
-      title: 'Research: Quantum Computing and Cryptography',
-      category: 'Research',
-      date: 'November 18, 2025',
-      readTime: '20 min read',
-      excerpt: 'Examining the implications of quantum computing on current cryptographic methods and future solutions.',
-      image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=80',
-      tags: ['Quantum Computing', 'Security', 'Cryptography'],
-      link: '#',
-    },
   ];
 
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+  const fetchBlogs = async () => {
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const response = await fetch(`${apiUrl}/api/blogs`);
+      if (response.ok) {
+        const data = await response.json();
+        if (data.blogs && data.blogs.length > 0) {
+          setPosts(data.blogs);
+        } else {
+          setPosts(staticPosts);
+        }
+      } else {
+        setPosts(staticPosts);
+      }
+    } catch (error) {
+      console.error('Error fetching blogs:', error);
+      setPosts(staticPosts);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <section id="blogs" className="py-12 sm:py-16 md:py-20" style={{ background: '#000000' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center text-white">Loading blogs...</div>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section id="blogs" className="py-20" style={{ background: '#000000' }}>
+    <section id="blogs" className="py-12 sm:py-16 md:py-20" style={{ background: '#000000' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">Blogs & Research</h2>
-          <p className="text-xl text-gray-300">Thoughts, insights, and research publications</p>
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black tracking-tight mb-4" style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            background: "linear-gradient(90deg, #555 0%, #fff 40%, #aaa 60%, #555 100%)",
+            backgroundSize: "200% auto",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            animation: "shimmer 3s linear infinite"
+          }}>
+            Blogs & Research
+          </h2>
+          <p className="text-lg sm:text-xl text-gray-300">Thoughts, insights, and research publications</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {posts.map((post) => (
             <article
-              key={post.id}
+              key={post._id || post.id}
               className="rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
               style={{ background: '#1a1a1a', border: '1px solid #333' }}
             >
@@ -121,8 +156,8 @@ export default function Blogs() {
                   ))}
                 </div>
 
-                <a
-                  href={post.link}
+                <Link
+                  href={`/blog/${post._id || post.id}`}
                   className="inline-flex items-center font-semibold"
                   style={{ color: '#ffd93d' }}
                 >
@@ -140,7 +175,7 @@ export default function Blogs() {
                       d="M9 5l7 7-7 7"
                     />
                   </svg>
-                </a>
+                </Link>
               </div>
             </article>
           ))}

@@ -4,47 +4,87 @@ import { useState, useEffect, useRef } from "react";
 const certificates = [
   {
     certificateId: "CERT-001",
-    title: "OOP Mastery",
-    issuedBy: "DIU CSE Department",
-    issueDate: "2025-12-10",
-    skills: ["OOP", "Java", "Design Patterns"],
+    title: "Data Science & Machine Learning",
+    issuedBy: "Skill Jobs",
+    issueDate: "2025-09-25",
+    skills: ["Data Analysis & Machine Learning", "python"],
     certificateURL: "https://example.com/cert1.pdf",
-    credentialID: "DIU-OOP-2025",
+    credentialID: "250260102",
     bg: "#000000",
-    image: "https://i.ibb.co.com/ZzfcH8Qp/Whats-App-Image-2025-12-12-at-23-47-46-73a9f0a1.jpg", // Add your certificate image here
+    image: "https://i.ibb.co.com/CKx4x2fC/Screenshot-2026-03-11-000118.png", // Add your certificate image here
   },
   {
     certificateId: "CERT-002",
-    title: "Factory & Singleton Design Patterns",
-    issuedBy: "Udemy",
-    issueDate: "2025-11-05",
-    skills: ["Design Patterns", "Software Architecture"],
+    title: "AI+ Prompt Engineering",
+    issuedBy: "AI CERT",
+    issueDate: "2025-07-09",
+    skills: ["How use AI Agent with proper Promt"],
     certificateURL: "https://i.ibb.co.com/HLpDyHJX/Certificate-IEB.jpg",
-    credentialID: "UDEMY-DP-2025",
+    credentialID: "315bd74f3fb0",
     bg: "#000000",
-    image: "https://i.ibb.co.com/HLpDyHJX/Certificate-IEB.jpg", // Add your certificate image here
+    image: "https://i.ibb.co.com/hRNTBVNm/1752081620619.jpg", // Add your certificate image here
   },
   {
     certificateId: "CERT-003",
-    title: "Full Stack Development",
-    issuedBy: "Coursera",
-    issueDate: "2025-10-20",
-    skills: ["React", "Node.js", "MongoDB"],
+    title: "Campus Ambassador",
+    issuedBy: "Netcom Learning",
+    issueDate: "2025-07-23",
+    skills: ["Effective Communication and Program Arranging"],
     certificateURL: "https://example.com/cert3.pdf",
-    credentialID: "COURSERA-FS-2025",
+    credentialID: "0000",
     bg: "#000000",
-    image: "/certificates/cert3.jpg", // Add your certificate image here
+    image: "https://i.ibb.co.com/C5Gk0c2f/1753862755308.jpg", // Add your certificate image here
   },
   {
     certificateId: "CERT-004",
-    title: "Cloud Architecture",
-    issuedBy: "AWS",
-    issueDate: "2025-09-15",
-    skills: ["AWS", "Cloud Computing", "DevOps"],
+    title: "Poster Presentation",
+    issuedBy: "IEB",
+    issueDate: "2025-12-15",
+    skills: ["IOT"],
     certificateURL: "https://example.com/cert4.pdf",
-    credentialID: "AWS-CA-2025",
+    credentialID: "0000",
     bg: "#000000",
-    image: "/certificates/cert4.jpg", // Add your certificate image here
+    image: "https://i.ibb.co.com/9mJTDnPG/1765722444057.jpg", // Add your certificate image here
+  }, {
+    certificateId: "CERT-005",
+    title: "project Showcase",
+    issuedBy: "Daffodil International University",
+    issueDate: "2025-11-24",
+    skills: ["IOT"],
+    certificateURL: "https://example.com/cert4.pdf",
+    credentialID: "000",
+    bg: "#000000",
+    image: "https://i.ibb.co.com/cSp2589S/Whats-App-Image-2026-03-10-at-11-45-16-PM.jpg", // Add your certificate image here
+  }, {
+    certificateId: "CERT-006",
+    title: "Volunteering",
+    issuedBy: "CDC & HR,DIU",
+    issueDate: "2025-07-12",
+    skills: ["Event Management"],
+    certificateURL: "https://example.com/cert4.pdf",
+    credentialID: "0000",
+    bg: "#000000",
+    image: "https://i.ibb.co.com/cSp2589S/Whats-App-Image-2026-03-10-at-11-45-16-PM.jpg", // Add your certificate image here
+  }, {
+    certificateId: "CERT-007",
+    title: "15th Rover Mate",
+    issuedBy: "Bangladesh Scout",
+    issueDate: "2026-01-07",
+    skills: ["Survive any critical Situation"],
+    certificateURL: "https://example.com/cert4.pdf",
+    credentialID: "022/2026",
+    bg: "#000000",
+    image: "https://i.ibb.co.com/NdyQLv7w/Whats-App-Image-2026-03-10-at-11-48-56-PM.jpg", // Add your certificate image here
+  }, {
+    certificateId: "CERT-008",
+    title: "20th investiture camp",
+    issuedBy: "Bangladesh Scout",
+    issueDate: "2026-01-07",
+    skills: ["Survive any critical Situation"],
+    certificateURL: "https://example.com/cert4.pdf",
+    credentialID: "DIUARSG-022/2026",
+    bg: "#000000",
+    image: "https://i.ibb.co.com/yFY2dxVL/Whats-App-Image-2026-03-10-at-11-49-38-PM.jpg", // Add your certificate image here
   },
 ];
 
@@ -67,11 +107,62 @@ function ShimmerText({ text, className }: { text: string; className?: string }) 
   );
 }
 
-function getCardStyle(offset: number) {
+function getCardStyle(offset: number, isMobile = false, isTablet = false) {
   const absOffset = Math.abs(offset);
   const sign = offset < 0 ? -1 : 1;
 
-  // Use fixed px offsets so cards never blow outside the container
+  // Mobile sizes
+  if (isMobile) {
+    if (absOffset === 0) {
+      return { zIndex: 10, transform: "translateX(0px) scale(1) rotateY(0deg)", opacity: 1, width: "280px" };
+    } else if (absOffset === 1) {
+      return {
+        zIndex: 7,
+        transform: `translateX(${sign * 200}px) scale(0.75) rotateY(${sign * -15}deg)`,
+        opacity: 0.6,
+        width: "240px",
+      };
+    } else {
+      return {
+        zIndex: 1,
+        transform: `translateX(${sign * 350}px) scale(0.5) rotateY(${sign * -30}deg)`,
+        opacity: 0,
+        width: "200px",
+        pointerEvents: "none" as const,
+      };
+    }
+  }
+
+  // Tablet sizes
+  if (isTablet) {
+    if (absOffset === 0) {
+      return { zIndex: 10, transform: "translateX(0px) scale(1) rotateY(0deg)", opacity: 1, width: "320px" };
+    } else if (absOffset === 1) {
+      return {
+        zIndex: 7,
+        transform: `translateX(${sign * 300}px) scale(0.8) rotateY(${sign * -18}deg)`,
+        opacity: 0.8,
+        width: "280px",
+      };
+    } else if (absOffset === 2) {
+      return {
+        zIndex: 4,
+        transform: `translateX(${sign * 520}px) scale(0.65) rotateY(${sign * -28}deg)`,
+        opacity: 0.4,
+        width: "240px",
+      };
+    } else {
+      return {
+        zIndex: 1,
+        transform: `translateX(${sign * 680}px) scale(0.5) rotateY(${sign * -35}deg)`,
+        opacity: 0,
+        width: "220px",
+        pointerEvents: "none" as const,
+      };
+    }
+  }
+
+  // Desktop sizes (original)
   if (absOffset === 0) {
     return { zIndex: 10, transform: "translateX(0px) scale(1) rotateY(0deg)", opacity: 1, width: "380px" };
   } else if (absOffset === 1) {
@@ -100,7 +191,21 @@ function getCardStyle(offset: number) {
 }
 
 function CertificateCard({ certificate, offset, onClick }: { certificate: typeof certificates[0]; offset: number; onClick: () => void }) {
-  const style = getCardStyle(offset);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 640);
+      setIsTablet(window.innerWidth >= 640 && window.innerWidth < 1024);
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  const style = getCardStyle(offset, isMobile, isTablet);
   const isCenter = offset === 0;
   const cardW = parseInt(style.width);
 
@@ -260,6 +365,7 @@ export default function CertificatesCarousel() {
 
   return (
     <div
+      id="achievements"
       className="min-h-screen flex flex-col items-center justify-center relative py-20"
       style={{
         background: "#030203",
@@ -274,31 +380,47 @@ export default function CertificatesCarousel() {
           0%   { background-position: 200% center; }
           100% { background-position: -200% center; }
         }
+
+        .carousel-container {
+          position: relative;
+          width: 100%;
+          max-width: 1400px;
+          height: 500px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          perspective: 1200px;
+          overflow: hidden;
+          padding-top: 20px;
+        }
+
+        @media (max-width: 640px) {
+          .carousel-container {
+            height: 360px;
+            perspective: 800px;
+            padding-top: 10px;
+          }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+          .carousel-container {
+            height: 420px;
+            perspective: 1000px;
+            padding-top: 15px;
+          }
+        }
       `}</style>
 
       {/* Title */}
-      <div style={{ marginBottom: "85px", fontFamily: "'Bebas Neue', sans-serif" }}>
+      <div style={{ marginBottom: "85px", fontFamily: "'Bebas Neue', sans-serif" }} className="px-4">
         <ShimmerText
-          className="text-8xl md:text-8xl font-black text-center tracking-tight"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-center tracking-tight"
           text="Certificates & Achievements"
         />
       </div>
 
       {/* Carousel — perspective enables 3D depth; overflow hidden clips cards that go outside */}
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          maxWidth: "1400px",
-          height: "500px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          perspective: "1200px",
-          overflow: "hidden",
-          paddingTop: "20px",
-        }}
-      >
+      <div className="carousel-container">
         {visibleRange.map((offset) => {
           const certIndex =
             (activeIndex + offset + certificates.length) % certificates.length;
@@ -337,17 +459,16 @@ export default function CertificatesCarousel() {
       </div>
 
       {/* Nav buttons */}
-      <div className="flex gap-6 mt-6">
+      <div className="flex gap-4 sm:gap-6 mt-6">
         <button
           onClick={prev}
+          className="nav-button w-[36px] h-[36px] sm:w-[44px] sm:h-[44px]"
           style={{
             background: "linear-gradient(90deg, #ff6b6b, #ffd93d)",
             border: "none",
             color: "#000",
             borderRadius: "50%",
-            width: "44px",
-            height: "44px",
-            fontSize: "1.2rem",
+            fontSize: "1rem",
             cursor: "pointer",
             transition: "opacity 0.3s",
             fontWeight: "bold",
@@ -359,14 +480,13 @@ export default function CertificatesCarousel() {
         </button>
         <button
           onClick={next}
+          className="nav-button w-[36px] h-[36px] sm:w-[44px] sm:h-[44px]"
           style={{
             background: "linear-gradient(90deg, #ff6b6b, #ffd93d)",
             border: "none",
             color: "#000",
             borderRadius: "50%",
-            width: "44px",
-            height: "44px",
-            fontSize: "1.2rem",
+            fontSize: "1rem",
             cursor: "pointer",
             transition: "opacity 0.3s",
             fontWeight: "bold",

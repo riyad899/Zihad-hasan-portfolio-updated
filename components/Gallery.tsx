@@ -58,6 +58,7 @@ const Skiper30 = ({img=image}:{img?:string[]}) => {
 
   return (
     <main
+    id="gallery"
     style={{
             background: "#030203",
           }}
@@ -66,12 +67,12 @@ const Skiper30 = ({img=image}:{img?:string[]}) => {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600&display=swap');
       `}</style>
-      <div className="flex h-[40vh] items-center justify-center gap-2">
+      <div className="flex h-[40vh] md:h-[40vh] items-center justify-center gap-2 px-4">
 
           {/* <span className="relative text-yellow-300 max-w-[12ch] text-xs uppercase leading-tight opacity-40 after:absolute after:left-1/2 after:top-full after:h-16 after:w-px after:bg-gradient-to-b after:from-white after:to-black after:content-['']">
             scroll down to see
           </span> */}
-          <div className="text-white text-8xl gap-5 grid grid-cols-2 w-full" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+          <div className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-8xl gap-2 sm:gap-3 md:gap-5 grid grid-cols-2 w-full" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
             <div className="flex justify-end">
               <p>THE</p>
             </div>            <TextLoop
@@ -135,7 +136,7 @@ const Skiper30 = ({img=image}:{img?:string[]}) => {
 
       <div
         ref={gallery}
-        className="relative box-border flex h-[175vh] gap-[2vw] overflow-hidden  p-[2vw]"
+        className="relative box-border flex h-[120vh] sm:h-[140vh] md:h-[160vh] lg:h-[175vh] gap-[1vw] sm:gap-[1.5vw] md:gap-[2vw] overflow-hidden p-[1vw] sm:p-[1.5vw] md:p-[2vw]"
       >
         <Column images={[img[0], img[1], img[2]]} y={y} />
         <Column images={[img[3], img[4], img[5]]} y={y2} />
@@ -161,7 +162,7 @@ type ColumnProps = {
 const Column = ({ images, y }: ColumnProps) => {
   return (
     <motion.div
-      className="relative -top-[45%] flex h-full w-1/4 min-w-62.5 flex-col gap-[2vw] first:top-[-45%] nth-2:top-[-95%] nth-3:top-[-45%] nth-4:top-[-75%]"
+      className="relative -top-[45%] flex h-full w-1/4 min-w-[80px] sm:min-w-[120px] md:min-w-[160px] lg:min-w-[250px] flex-col gap-[1vw] sm:gap-[1.5vw] md:gap-[2vw] first:top-[-45%] nth-2:top-[-95%] nth-3:top-[-45%] nth-4:top-[-75%]"
       style={{ y }}
     >
       {images.map((src, i) => (

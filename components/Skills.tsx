@@ -148,15 +148,18 @@ const SkillBadge: React.FC<{ skill: Skill }> = ({ skill }) => {
 const FeaturedSkills: React.FC = () => {
   return (
     <section
+      id="skills"
+      className="px-4 sm:px-6 md:px-8 lg:px-10"
       style={{
         minHeight: "100vh",
         background: "#000000",
-        padding: "80px 40px",
+        padding: "60px 20px",
         fontFamily: "'Geist', 'Inter', sans-serif",
       }}
     >
       {/* Ambient background blobs */}
       <div
+        className="hidden sm:block"
         style={{
           position: "fixed",
           top: "10%",
@@ -171,6 +174,7 @@ const FeaturedSkills: React.FC = () => {
         }}
       />
       <div
+        className="hidden sm:block"
         style={{
           position: "fixed",
           bottom: "15%",
@@ -190,18 +194,24 @@ const FeaturedSkills: React.FC = () => {
         <h1
           style={{
             textAlign: "center",
-            fontSize: "clamp(2rem, 5vw, 3rem)",
-            fontWeight: 700,
-            marginBottom: "64px",
+            fontSize: "clamp(2rem, 5vw, 5rem)",
+            fontWeight: 900,
+            marginBottom: "48px",
             letterSpacing: "-0.02em",
-            color: "#ffffff",
+            fontFamily: "'Bebas Neue', sans-serif",
+            background: "linear-gradient(90deg, #555 0%, #fff 40%, #aaa 60%, #555 100%)",
+            backgroundSize: "200% auto",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            animation: "shimmer 3s linear infinite"
           }}
         >
           Featured Skills
         </h1>
 
         {/* Categories */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "48px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
           {skillsData.map((section) => (
             <div key={section.category}>
               {/* Category header */}

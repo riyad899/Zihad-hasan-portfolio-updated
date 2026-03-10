@@ -206,6 +206,94 @@ const Hero = () => {
           50%       { opacity: 1; }
         }
 
+        /* Mobile Responsive Styles */
+        @media (max-width: 640px) {
+          .hero {
+            cursor: default;
+          }
+
+          .hero__marquee-wrap {
+            bottom: 35%;
+          }
+
+          .hero__marquee-text {
+            font-size: clamp(40px, 15vw, 80px);
+          }
+
+          .hero__center {
+            right: 5%;
+            bottom: 12%;
+          }
+
+          .hero__title-line {
+            font-size: clamp(20px, 5vw, 32px);
+          }
+
+          .hero__location {
+            left: 16px;
+            bottom: 20px;
+            font-size: 7px;
+          }
+
+          .hero__scroll {
+            right: 16px;
+            bottom: 20px;
+          }
+
+          .hero__scroll-label {
+            font-size: 6px;
+          }
+
+          .hero__scroll-line {
+            height: 30px;
+          }
+
+          .hero__cursor {
+            display: none;
+          }
+
+          .hero__dot {
+            width: 4px;
+            height: 4px;
+          }
+        }
+
+        /* Tablet Responsive Styles */
+        @media (min-width: 641px) and (max-width: 1024px) {
+          .hero__marquee-wrap {
+            bottom: 36%;
+          }
+
+          .hero__marquee-text {
+            font-size: clamp(60px, 12vw, 140px);
+          }
+
+          .hero__center {
+            right: 5%;
+            bottom: 14%;
+          }
+
+          .hero__title-line {
+            font-size: clamp(24px, 4vw, 42px);
+          }
+
+          .hero__location {
+            left: 32px;
+            bottom: 24px;
+            font-size: 8px;
+          }
+
+          .hero__scroll {
+            right: 32px;
+            bottom: 24px;
+          }
+
+          .hero__dot {
+            width: 5px;
+            height: 5px;
+          }
+        }
+
         @media (max-width: 768px) {
           .hero__center   { right: 4%; bottom: 15%; }
           .hero__location { left: 24px; }
@@ -247,7 +335,7 @@ const Hero = () => {
         {/* Bottom-right tagline */}
         <div className="hero__center">
           <span className="hero__title-line">AI Engineer</span>
-          <span className="hero__title-line">and web developer</span>
+          <span className="hero__title-line">and Reseacher</span>
         </div>
 
         {/* Location */}
@@ -259,6 +347,7 @@ const Hero = () => {
           <div className="hero__scroll-line" />
         </div>
       </section>
+      <div id="home" style={{ position: 'absolute', top: 0 }} />
     </>
   );
 };
