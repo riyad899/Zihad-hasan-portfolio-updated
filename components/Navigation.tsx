@@ -480,7 +480,7 @@ export function MorphicNavbar() {
             })}
           </ul>
           <a
-            href="/Zihad_hasan_Resume%20(3).pdf"
+            href="/Zihad_hasan_Resume.pdf"
             download="Zihad_Hasan_CV.pdf"
             className="cv-download-btn"
           >
@@ -527,7 +527,7 @@ export function MorphicNavbar() {
           );
         })}
         <a
-          href="/Zihad_hasan_Resume%20(3).pdf"
+          href="/Zihad_hasan_Resume.pdf"
           download="Zihad_Hasan_CV.pdf"
           className="cv-download-btn"
         >
