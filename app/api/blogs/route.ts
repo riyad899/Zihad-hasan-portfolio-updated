@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
+import { ObjectId } from 'mongodb';
 
 export async function POST(request: NextRequest) {
   try {
@@ -83,7 +84,6 @@ export async function DELETE(request: NextRequest) {
     const db = client.db('blogDb');
     const collection = db.collection('blog');
 
-    const { ObjectId } = require('mongodb');
     const result = await collection.deleteOne({ _id: new ObjectId(id) });
 
     if (result.deletedCount === 0) {

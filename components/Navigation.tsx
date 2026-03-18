@@ -60,6 +60,19 @@ export function MorphicNavbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Prevent background scroll when the mobile menu is open
+  useEffect(() => {
+    if (!isMenuOpen) {
+      document.body.style.removeProperty("overflow");
+      return;
+    }
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [isMenuOpen]);
+
   const isActiveLink = (path: string) => {
     return activePath === path;
   };
@@ -299,6 +312,7 @@ export function MorphicNavbar() {
             left: 0;
             width: 100%;
             height: 100vh;
+            height: 100dvh;
             background: rgba(3, 2, 3, 0.98);
             backdrop-filter: blur(10px);
             flex-direction: column;
@@ -309,6 +323,10 @@ export function MorphicNavbar() {
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
+            padding: 96px 20px 32px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
           }
 
           .mobile-menu.open {
@@ -325,6 +343,7 @@ export function MorphicNavbar() {
             text-decoration: none;
             transition: color 0.25s;
             position: relative;
+            padding: 8px 0;
           }
 
           .mobile-menu a.active {
@@ -386,6 +405,7 @@ export function MorphicNavbar() {
             left: 0;
             width: 100%;
             height: 100vh;
+            height: 100dvh;
             background: rgba(3, 2, 3, 0.98);
             backdrop-filter: blur(10px);
             flex-direction: column;
@@ -396,6 +416,10 @@ export function MorphicNavbar() {
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
+            padding: 104px 28px 40px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
           }
 
           .mobile-menu.open {
@@ -412,6 +436,7 @@ export function MorphicNavbar() {
             text-decoration: none;
             transition: color 0.25s;
             position: relative;
+            padding: 10px 0;
           }
 
           .mobile-menu a.active {

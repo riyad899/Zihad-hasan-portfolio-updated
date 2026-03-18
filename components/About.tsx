@@ -31,7 +31,7 @@ export default function About() {
 
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
-              Hi, I'm a passionate Software Engineering student & AI enthusiast
+              Hi, I&apos;m a passionate Software Engineering student & AI enthusiast
             </h3>
             <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
               With a strong foundation in programming and data-driven technologies, I am dedicated to building intelligent and impactful solutions. My journey in tech started with curiosity about how systems work and has evolved into a passion for software development, data analysis, and machine learning.

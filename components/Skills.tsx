@@ -19,7 +19,7 @@ import {
   SiAnaconda,
   SiArduino,
 } from "react-icons/si";
-import { FaJava, FaDatabase, FaNetworkWired, FaChartBar } from "react-icons/fa";
+import { FaJava, FaDatabase, FaNetworkWired } from "react-icons/fa";
 import { BsBarChartFill } from "react-icons/bs";
 import { MdShowChart, MdVideoLibrary, MdPhotoLibrary, MdBrush } from "react-icons/md";
 import { TbChartHistogram } from "react-icons/tb";
@@ -102,8 +102,8 @@ const SkillBadge: React.FC<{ skill: Skill }> = ({ skill }) => {
       style={{
         display: "inline-flex",
         alignItems: "center",
-        gap: "14px",
-        padding: "14px 24px",
+        gap: "12px",
+        padding: "12px 16px",
         borderRadius: "12px",
         border: `1px solid ${hovered ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.1)"}`,
         background: hovered
@@ -115,12 +115,14 @@ const SkillBadge: React.FC<{ skill: Skill }> = ({ skill }) => {
         boxShadow: hovered ? "0 4px 20px rgba(255,107,107,0.3)" : "none",
         backdropFilter: "blur(4px)",
         userSelect: "none",
-        whiteSpace: "nowrap",
+        // Allow wrapping on small screens to avoid horizontal scroll
+        whiteSpace: "normal",
+        maxWidth: "100%",
       }}
     >
       <span
         style={{
-          fontSize: "22px",
+          fontSize: "20px",
           color: hovered ? skill.color : `${skill.color}cc`,
           transition: "color 0.25s ease",
           display: "flex",
@@ -131,12 +133,14 @@ const SkillBadge: React.FC<{ skill: Skill }> = ({ skill }) => {
       </span>
       <span
         style={{
-          fontSize: "15px",
+          fontSize: "14px",
           fontWeight: 500,
           fontFamily: "'Geist Mono', 'Fira Code', 'Courier New', monospace",
           color: hovered ? "#ffffff" : "rgba(255,255,255,0.8)",
           letterSpacing: "0.02em",
           transition: "color 0.25s ease",
+          lineHeight: 1.1,
+          wordBreak: "break-word",
         }}
       >
         {skill.name}
@@ -153,7 +157,7 @@ const FeaturedSkills: React.FC = () => {
       style={{
         minHeight: "100vh",
         background: "#000000",
-        padding: "60px 20px",
+        padding: "56px 16px",
         fontFamily: "'Geist', 'Inter', sans-serif",
       }}
     >
@@ -196,7 +200,7 @@ const FeaturedSkills: React.FC = () => {
             textAlign: "center",
             fontSize: "clamp(2rem, 5vw, 5rem)",
             fontWeight: 900,
-            marginBottom: "48px",
+            marginBottom: "36px",
             letterSpacing: "-0.02em",
             fontFamily: "'Bebas Neue', sans-serif",
             background: "linear-gradient(90deg, #555 0%, #fff 40%, #aaa 60%, #555 100%)",

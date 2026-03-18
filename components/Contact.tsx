@@ -44,7 +44,7 @@ export default function Contact() {
           message: data.error || 'Failed to send message. Please try again.',
         });
       }
-    } catch (error) {
+    } catch {
       setStatus({
         type: 'error',
         message: 'An error occurred. Please try again later.',
@@ -76,7 +76,7 @@ export default function Contact() {
           }}>
             Contact Us
           </h2>
-          <p className="text-xl text-gray-300">Let's work together on your next project</p>
+          <p className="text-xl text-gray-300">Let&apos;s work together on your next project</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -85,7 +85,7 @@ export default function Contact() {
             <div>
               <h3 className="text-2xl font-bold text-white mb-6">Get In Touch</h3>
               <p className="text-gray-300 mb-8">
-                I'm always interested in hearing about new projects and opportunities.
+                I&apos;m always interested in hearing about new projects and opportunities.
                 Whether you have a question or just want to say hi, feel free to reach out!
               </p>
             </div>

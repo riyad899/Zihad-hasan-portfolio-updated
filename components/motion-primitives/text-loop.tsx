@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion, Transition } from 'framer-motion';
+import { AnimatePresence, motion, Transition, type Variants } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 interface TextLoopProps {
@@ -8,11 +8,7 @@ interface TextLoopProps {
   className?: string;
   interval?: number;
   transition?: Transition;
-  variants?: {
-    initial: any;
-    animate: any;
-    exit: any;
-  };
+  variants?: Variants;
 }
 
 export function TextLoop({
@@ -32,7 +28,7 @@ export function TextLoop({
     return () => clearInterval(timer);
   }, [children.length, interval]);
 
-  const defaultVariants = {
+  const defaultVariants: Variants = {
     initial: { y: 20, opacity: 0 },
     animate: { y: 0, opacity: 1 },
     exit: { y: -20, opacity: 0 },

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
-import { ObjectId } from 'mongodb';
+import { ObjectId, type Document } from 'mongodb';
 
 // POST - Add a comment to a blog
 export async function POST(
@@ -22,7 +22,7 @@ export async function POST(
 
     const client = await clientPromise;
     const db = client.db('blogDb');
-    const collection = db.collection('blog');
+    const collection = db.collection<Document>('blog');
 
     const newComment = {
       _id: new ObjectId().toString(),
@@ -34,7 +34,7 @@ export async function POST(
     // Add comment to the blog's comments array
     const result = await collection.findOneAndUpdate(
       { _id: new ObjectId(id) },
-      { $push: { comments: newComment } as any },
+      { $push: { comments: newComment } },
       { returnDocument: 'after' }
     );
 

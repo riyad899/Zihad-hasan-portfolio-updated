@@ -1,5 +1,4 @@
 "use client";
-"use client";
 import { useEffect, useRef, useState } from "react";
 
 const Hero = () => {
@@ -33,6 +32,7 @@ const Hero = () => {
           position: relative;
           width: 100%;
           height: 100vh;
+          height: 100dvh;
           overflow: hidden;
           background: #030203;
           display: flex;
@@ -335,7 +335,7 @@ const Hero = () => {
         {/* Bottom-right tagline */}
         <div className="hero__center">
           <span className="hero__title-line">AI Engineer</span>
-          <span className="hero__title-line">and Reseacher</span>
+          <span className="hero__title-line">and Rechercher</span>
         </div>
 
         {/* Location */}

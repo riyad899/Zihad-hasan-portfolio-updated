@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 const certificates = [
   {
@@ -344,9 +344,6 @@ function CertificateCard({ certificate, offset, onClick }: { certificate: typeof
 
 export default function CertificatesCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
-  // Use ref so the interval callback always has the latest index without needing to recreate
-  const activeIndexRef = useRef(activeIndex);
-  activeIndexRef.current = activeIndex;
 
   const prev = () =>
     setActiveIndex((i) => (i - 1 + certificates.length) % certificates.length);

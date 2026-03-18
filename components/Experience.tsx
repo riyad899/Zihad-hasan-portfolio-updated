@@ -56,9 +56,9 @@ const experiences = [
   ];
 
   return (
-    <section id="experience" className="py-20" style={{ background: '#000000' }}>
+    <section id="experience" className="py-12 sm:py-16 md:py-20" style={{ background: '#000000' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black tracking-tight mb-4" style={{
             fontFamily: "'Bebas Neue', sans-serif",
             background: "linear-gradient(90deg, #555 0%, #fff 40%, #aaa 60%, #555 100%)",
@@ -70,7 +70,7 @@ const experiences = [
           }}>
             Experience
           </h2>
-          <p className="text-xl text-gray-300">My professional journey</p>
+          <p className="text-lg sm:text-xl text-gray-300">My professional journey</p>
         </div>
 
         <div className="relative">
@@ -93,7 +93,7 @@ const experiences = [
                   <div className="rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300" style={{ background: exp.current ? 'linear-gradient(90deg, #ff6b6b, #ffd93d)' : '#1a1a1a', border: exp.current ? 'none' : '1px solid #333' }}>
                     {exp.current && (
                       <span className="inline-block px-3 py-1 bg-white text-black text-xs font-semibold rounded-full mb-3">
-                        Current Position``
+                        Current Position
                       </span>
                     )}
                     <h3 className="text-2xl font-bold text-white mb-2">
