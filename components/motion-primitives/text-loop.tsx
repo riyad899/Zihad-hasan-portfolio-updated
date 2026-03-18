@@ -41,9 +41,10 @@ export function TextLoop({
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
-          initial={animationVariants.initial}
-          animate={animationVariants.animate}
-          exit={animationVariants.exit}
+          variants={animationVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
           transition={transition || { duration: 0.5 }}
         >
           {children[currentIndex]}

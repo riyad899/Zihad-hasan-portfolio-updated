@@ -2,6 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 import { ObjectId, type Document } from 'mongodb';
 
+interface BlogComment {
+  _id: string;
+  name: string;
+  comment: string;
+  createdAt: string;
+}
+
+interface BlogDocument extends Document {
+  comments?: BlogComment[];
+}
+
 // POST - Add a comment to a blog
 export async function POST(
   request: NextRequest,
@@ -9,7 +20,7 @@ export async function POST(
 ) {
   try {
     const { id } = await params;
-    const body = await request.json();
+    const body: { name?: string; comment?: string } = await request.json();
     const { name, comment } = body;
 
     // Validate required fields
@@ -22,7 +33,7 @@ export async function POST(
 
     const client = await clientPromise;
     const db = client.db('blogDb');
-    const collection = db.collection<Document>('blog');
+    const collection = db.collection<BlogDocument>('blog');
 
     const newComment = {
       _id: new ObjectId().toString(),
@@ -34,7 +45,7 @@ export async function POST(
     // Add comment to the blog's comments array
     const result = await collection.findOneAndUpdate(
       { _id: new ObjectId(id) },
-      { $push: { comments: newComment } },
+      { $push: { comments: newComment } } as any,
       { returnDocument: 'after' }
     );
 
