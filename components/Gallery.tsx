@@ -5,7 +5,7 @@ import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
 import Lenis from "lenis";
 import { useEffect, useRef, useState } from "react";
 
-const image = [
+const defaultImages = [
   "/images/WhatsApp Image 2026-02-26 at 04.49.25.jpeg",
   "/images/WhatsApp Image 2026-02-26 at 04.49.26 (1).jpeg",
   "/images/WhatsApp Image 2026-02-26 at 04.49.26.jpeg",
@@ -20,8 +20,19 @@ const image = [
   "/images/WhatsApp Image 2026-02-26 at 04.49.37.jpeg",
 ];
 
-const Skiper30 = ({img=image}:{img?:string[]}) => {
+const Skiper30 = ({ gallery: dbGallery }: { gallery?: any[] }) => {
   const gallery = useRef<HTMLDivElement>(null);
+  
+  // Extract photo URLs from MongoDB documents
+  const dbImages = (dbGallery || []).map((photo: any) => photo.imageUrl);
+  
+  // Pad images to exactly 12 items
+  const imgList = [...dbImages];
+  while (imgList.length < 12) {
+    imgList.push(defaultImages[imgList.length % defaultImages.length]);
+  }
+  const img = imgList.slice(0, 12);
+  
   const [dimension, setDimension] = useState({ width: 0, height: 0 });
 
   const { scrollYProgress } = useScroll({

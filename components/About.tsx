@@ -1,4 +1,11 @@
-export default function About() {
+export default function About({ about }: { about?: any }) {
+  const statsList = about?.stats || [
+    { value: "6+", label: "Leadership & Volunteer Roles" },
+    { value: "5+", label: "Professional Certifications" },
+    { value: "8+", label: "Technologies & Libraries" },
+    { value: "5+", label: "Years of Tech Experience" }
+  ];
+
   return (
     <section id="about" className="py-12 sm:py-16 md:py-20" style={{ background: '#000000' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -21,7 +28,7 @@ export default function About() {
           <div className="relative">
             <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="/Vipimages/image.png"
+                src={about?.profilePic || "/Vipimages/image.png"}
                 alt="Profile"
                 className="w-full h-full object-cover"
               />
@@ -31,10 +38,10 @@ export default function About() {
 
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
-              Hi, I&apos;m a passionate Software Engineering student & AI enthusiast
+              {about?.bio || "Hi, I'm a passionate Software Engineering student & AI enthusiast"}
             </h3>
             <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-              With a strong foundation in programming and data-driven technologies, I am dedicated to building intelligent and impactful solutions. My journey in tech started with curiosity about how systems work and has evolved into a passion for software development, data analysis, and machine learning.
+              {about?.description || "With a strong foundation in programming and data-driven technologies, I am dedicated to building intelligent and impactful solutions. My journey in tech started with curiosity about how systems work and has evolved into a passion for software development, data analysis, and machine learning."}
             </p>
 
             <div className="text-base sm:text-lg text-gray-300 leading-relaxed">
@@ -48,24 +55,13 @@ export default function About() {
               </ul>
             </div>
 
-
             <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-4 sm:pt-6">
-              <div className="p-3 sm:p-4 rounded-lg shadow" style={{ background: 'linear-gradient(90deg, #ff6b6b, #ffd93d)' }}>
-                <p className="text-2xl sm:text-3xl font-bold text-white">6+</p>
-                <p className="text-white text-xs sm:text-sm">Leadership & Volunteer Roles</p>
-              </div>
-              <div className="p-3 sm:p-4 rounded-lg shadow" style={{ background: 'linear-gradient(90deg, #ff6b6b, #ffd93d)' }}>
-                <p className="text-2xl sm:text-3xl font-bold text-white">5+</p>
-                <p className="text-white text-xs sm:text-sm">Professional Certifications</p>
-              </div>
-              <div className="p-3 sm:p-4 rounded-lg shadow" style={{ background: 'linear-gradient(90deg, #ff6b6b, #ffd93d)' }}>
-                <p className="text-2xl sm:text-3xl font-bold text-white">8+</p>
-                <p className="text-white text-xs sm:text-sm">Technologies & Libraries</p>
-              </div>
-              <div className="p-3 sm:p-4 rounded-lg shadow" style={{ background: 'linear-gradient(90deg, #ff6b6b, #ffd93d)' }}>
-                <p className="text-2xl sm:text-3xl font-bold text-white">5+</p>
-                <p className="text-white text-xs sm:text-sm">Years of Tech Experience</p>
-              </div>
+              {statsList.map((stat: any, index: number) => (
+                <div key={index} className="p-3 sm:p-4 rounded-lg shadow" style={{ background: 'linear-gradient(90deg, #ff6b6b, #ffd93d)' }}>
+                  <p className="text-2xl sm:text-3xl font-bold text-white">{stat.value}</p>
+                  <p className="text-white text-xs sm:text-sm">{stat.label}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
-const Hero = () => {
+const Hero = ({ about }: { about?: any }) => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const heroRef = useRef<HTMLElement>(null);
 
@@ -19,7 +19,8 @@ const Hero = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  const name = "Zihad Hasan • Zihad Hasan • Zihad Hasan • Zihad Hasan • Zihad Hasan • ";
+  const rawName = about?.name || "Zihad Hasan";
+  const name = `${rawName} • `.repeat(5);
 
   return (
     <>
@@ -307,6 +308,7 @@ const Hero = () => {
           className="hero__bg"
           style={{
             transform: `translate(${mousePos.x * 0.4}px, ${mousePos.y * 0.4}px) scale(1.04)`,
+            backgroundImage: `url(${about?.bannerPic || 'https://i.ibb.co.com/HTXF1bbB/Whats-App-Image-2026-03-03-at-18-22-30.jpg'})`
           }}
         />
 
@@ -334,12 +336,20 @@ const Hero = () => {
 
         {/* Bottom-right tagline */}
         <div className="hero__center">
-          <span className="hero__title-line">AI Engineer</span>
-          <span className="hero__title-line">and Rechercher</span>
+          {about?.bannerSubtitle ? (
+            about.bannerSubtitle.split('\n').map((line: string, i: number) => (
+              <span key={i} className="hero__title-line">{line}</span>
+            ))
+          ) : (
+            <>
+              <span className="hero__title-line">AI Engineer</span>
+              <span className="hero__title-line">and Rechercher</span>
+            </>
+          )}
         </div>
 
         {/* Location */}
-        <div className="hero__location">Based in Bangladesh</div>
+        <div className="hero__location">{about?.location || "Based in Bangladesh"}</div>
 
         {/* Scroll indicator */}
         <div className="hero__scroll">

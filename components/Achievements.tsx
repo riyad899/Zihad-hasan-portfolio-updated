@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 
-const certificates = [
+const defaultCertificates = [
   {
     certificateId: "CERT-001",
     title: "Data Science & Machine Learning",
@@ -190,7 +190,7 @@ function getCardStyle(offset: number, isMobile = false, isTablet = false) {
   }
 }
 
-function CertificateCard({ certificate, offset, onClick }: { certificate: typeof certificates[0]; offset: number; onClick: () => void }) {
+function CertificateCard({ certificate, offset, onClick }: { certificate: any; offset: number; onClick: () => void }) {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
 
@@ -342,7 +342,8 @@ function CertificateCard({ certificate, offset, onClick }: { certificate: typeof
   );
 }
 
-export default function CertificatesCarousel() {
+export default function CertificatesCarousel({ certificates: dynamicCertificates }: { certificates?: any[] }) {
+  const certificates = dynamicCertificates && dynamicCertificates.length > 0 ? dynamicCertificates : defaultCertificates;
   const [activeIndex, setActiveIndex] = useState(0);
 
   const prev = () =>

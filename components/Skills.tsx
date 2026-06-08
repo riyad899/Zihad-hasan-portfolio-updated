@@ -1,28 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  SiC,
-  SiCplusplus,
-  SiJavascript,
-  SiPhp,
-  SiPython,
-  SiHtml5,
-  SiCss,
-  SiNumpy,
-  SiPandas,
-  SiScikitlearn,
-  SiPytorch,
-  SiTensorflow,
-  SiGnubash,
-  SiCanva,
-  SiAnaconda,
-  SiArduino,
-} from "react-icons/si";
-import { FaJava, FaDatabase, FaNetworkWired } from "react-icons/fa";
-import { BsBarChartFill } from "react-icons/bs";
-import { MdShowChart, MdVideoLibrary, MdPhotoLibrary, MdBrush } from "react-icons/md";
-import { TbChartHistogram } from "react-icons/tb";
+import * as SiIcons from "react-icons/si";
+import * as FaIcons from "react-icons/fa";
+import * as BsIcons from "react-icons/bs";
+import * as MdIcons from "react-icons/md";
+import * as TbIcons from "react-icons/tb";
 
 interface Skill {
   name: string;
@@ -35,57 +18,91 @@ interface SkillCategory {
   skills: Skill[];
 }
 
+const getIcon = (iconName: string): React.ComponentType<any> | null => {
+  if (!iconName) return null;
+  if (iconName.startsWith("Si")) return (SiIcons as any)[iconName] || null;
+  if (iconName.startsWith("Fa")) return (FaIcons as any)[iconName] || null;
+  if (iconName.startsWith("Bs")) return (BsIcons as any)[iconName] || null;
+  if (iconName.startsWith("Md")) return (MdIcons as any)[iconName] || null;
+  if (iconName.startsWith("Tb")) return (TbIcons as any)[iconName] || null;
+  return null;
+};
+
+const groupSkills = (flatSkills: any[]): SkillCategory[] => {
+  const categoriesMap: { [key: string]: Skill[] } = {};
+
+  flatSkills.forEach((skill) => {
+    const IconComponent = getIcon(skill.iconName) || FaIcons.FaCode;
+    const mappedSkill: Skill = {
+      name: skill.name,
+      icon: <IconComponent />,
+      color: skill.color || "#ffffff",
+    };
+
+    const cat = skill.category || "General";
+    if (!categoriesMap[cat]) {
+      categoriesMap[cat] = [];
+    }
+    categoriesMap[cat].push(mappedSkill);
+  });
+
+  return Object.entries(categoriesMap).map(([category, skills]) => ({
+    category,
+    skills,
+  }));
+};
+
 const skillsData: SkillCategory[] = [
   {
     category: "Programming Languages",
     skills: [
-      { name: "C", icon: <SiC />, color: "#A8B9CC" },
-      { name: "C++", icon: <SiCplusplus />, color: "#00599C" },
-      { name: "Java", icon: <FaJava />, color: "#ED8B00" },
-      { name: "JavaScript", icon: <SiJavascript />, color: "#F7DF1E" },
-      { name: "PHP", icon: <SiPhp />, color: "#777BB4" },
-      { name: "SQL", icon: <FaDatabase />, color: "#336791" },
-      { name: "Python", icon: <SiPython />, color: "#3776AB" },
+      { name: "C", icon: <SiIcons.SiC />, color: "#A8B9CC" },
+      { name: "C++", icon: <SiIcons.SiCplusplus />, color: "#00599C" },
+      { name: "Java", icon: <FaIcons.FaJava />, color: "#ED8B00" },
+      { name: "JavaScript", icon: <SiIcons.SiJavascript />, color: "#F7DF1E" },
+      { name: "PHP", icon: <SiIcons.SiPhp />, color: "#777BB4" },
+      { name: "SQL", icon: <FaIcons.FaDatabase />, color: "#336791" },
+      { name: "Python", icon: <SiIcons.SiPython />, color: "#3776AB" },
     ],
   },
   {
     category: "Web Technologies",
     skills: [
-      { name: "HTML", icon: <SiHtml5 />, color: "#E34F26" },
-      { name: "CSS", icon: <SiCss />, color: "#1572B6" },
+      { name: "HTML", icon: <SiIcons.SiHtml5 />, color: "#E34F26" },
+      { name: "CSS", icon: <SiIcons.SiCss />, color: "#1572B6" },
     ],
   },
   {
     category: "Data Science & ML",
     skills: [
-      { name: "NumPy", icon: <SiNumpy />, color: "#013243" },
-      { name: "Pandas", icon: <SiPandas />, color: "#150458" },
-      { name: "Scikit-learn", icon: <SiScikitlearn />, color: "#F7931E" },
-      { name: "Seaborn", icon: <BsBarChartFill />, color: "#4C72B0" },
-      { name: "Matplotlib", icon: <MdShowChart />, color: "#11557C" },
-      { name: "PyTorch", icon: <SiPytorch />, color: "#EE4C2C" },
-      { name: "TensorFlow", icon: <SiTensorflow />, color: "#FF6F00" },
+      { name: "NumPy", icon: <SiIcons.SiNumpy />, color: "#013243" },
+      { name: "Pandas", icon: <SiIcons.SiPandas />, color: "#150458" },
+      { name: "Scikit-learn", icon: <SiIcons.SiScikitlearn />, color: "#F7931E" },
+      { name: "Seaborn", icon: <BsIcons.BsBarChartFill />, color: "#4C72B0" },
+      { name: "Matplotlib", icon: <MdIcons.MdShowChart />, color: "#11557C" },
+      { name: "PyTorch", icon: <SiIcons.SiPytorch />, color: "#EE4C2C" },
+      { name: "TensorFlow", icon: <SiIcons.SiTensorflow />, color: "#FF6F00" },
     ],
   },
   {
     category: "Design & Multimedia",
     skills: [
-      { name: "Adobe Photoshop", icon: <MdPhotoLibrary />, color: "#31A8FF" },
-      { name: "Adobe Illustrator", icon: <MdBrush />, color: "#FF9A00" },
-      { name: "Canva", icon: <SiCanva />, color: "#00C4CC" },
-      { name: "DaVinci Resolve", icon: <MdVideoLibrary />, color: "#FF5722" },
+      { name: "Adobe Photoshop", icon: <MdIcons.MdPhotoLibrary />, color: "#31A8FF" },
+      { name: "Adobe Illustrator", icon: <MdIcons.MdBrush />, color: "#FF9A00" },
+      { name: "Canva", icon: <SiIcons.SiCanva />, color: "#00C4CC" },
+      { name: "DaVinci Resolve", icon: <MdIcons.MdVideoLibrary />, color: "#FF5722" },
     ],
   },
   {
     category: "Tools & Platforms",
     skills: [
-      { name: "Shell", icon: <SiGnubash />, color: "#4EAA25" },
-      { name: "Power BI", icon: <TbChartHistogram />, color: "#F2C811" },
-      { name: "Anaconda Navigator", icon: <SiAnaconda />, color: "#44A833" },
-      { name: "Arduino", icon: <SiArduino />, color: "#00979D" },
+      { name: "Shell", icon: <SiIcons.SiGnubash />, color: "#4EAA25" },
+      { name: "Power BI", icon: <TbIcons.TbChartHistogram />, color: "#F2C811" },
+      { name: "Anaconda Navigator", icon: <SiIcons.SiAnaconda />, color: "#44A833" },
+      { name: "Arduino", icon: <SiIcons.SiArduino />, color: "#00979D" },
       {
         name: "Cisco Packet Tracer",
-        icon: <FaNetworkWired />,
+        icon: <FaIcons.FaNetworkWired />,
         color: "#1BA0D7",
       },
     ],
@@ -149,7 +166,7 @@ const SkillBadge: React.FC<{ skill: Skill }> = ({ skill }) => {
   );
 };
 
-const FeaturedSkills: React.FC = () => {
+const FeaturedSkills: React.FC<{ skills?: any[] }> = ({ skills }) => {
   return (
     <section
       id="skills"
@@ -216,7 +233,7 @@ const FeaturedSkills: React.FC = () => {
 
         {/* Categories */}
         <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
-          {skillsData.map((section) => (
+          {(skills && skills.length > 0 ? groupSkills(skills) : skillsData).map((section) => (
             <div key={section.category}>
               {/* Category header */}
               <div
